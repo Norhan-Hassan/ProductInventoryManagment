@@ -30,6 +30,10 @@ namespace ProductManagment
         }
         public static IHostBuilder CreateHostBuilder() =>
            Host.CreateDefaultBuilder()
+                .ConfigureAppConfiguration((context, config) =>
+                {
+                     config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                })
                .ConfigureLogging(logging =>
                  {
                      logging.ClearProviders();
@@ -38,7 +42,8 @@ namespace ProductManagment
                  })
                .ConfigureServices((context, services) =>
                {
-                   var connectionString = "Data Source=.;Initial Catalog=ProductDB;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=True;";
+                   var configuration = context.Configuration;
+                   var connectionString = configuration.GetConnectionString("DefaultConnection");
                    services.AddDbContext<ApplicationDbContext>(options =>
                         options.UseSqlServer(connectionString));
                    services.AddScoped<ICategoryService, CategoryService>();
