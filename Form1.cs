@@ -7,13 +7,7 @@ namespace ProductManagment
             InitializeComponent();
         }
 
-        private void treeList1_FocusedNodeChanged(object sender, DevExpress.XtraTreeList.FocusedNodeChangedEventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-        }
+      
+        
     }
 }
