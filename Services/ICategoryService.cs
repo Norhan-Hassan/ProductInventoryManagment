@@ -12,6 +12,6 @@ namespace ProductManagment.Services
     public interface ICategoryService
     {
         List<CategoryDTO> GetCategories();
-        
+        List<CategoriesWithProductsDTO> GetCategoriesWithProducts();
     }
 }
