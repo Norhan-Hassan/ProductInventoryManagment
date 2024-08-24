@@ -25,6 +25,16 @@ namespace ProductManagment
                 MessageBox.Show($"Error loading categories: {ex.Message}");
             }
         }
+        private void LoadParentChildTreeList()
+        {
+            var categoriesWithProducts = _categoryService.GetCategoriesWithProducts();
+
+            ConstructTreeList2();
+
+            treeList2.BeginUpdate();
+            treeList2.DataSource = categoriesWithProducts;
+            treeList2.EndUpdate();
+        }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.SelectedValue is int categoryId && categoryId != 0)
@@ -85,14 +95,6 @@ namespace ProductManagment
                 treeList1.Columns.Clear();
                 treeList1.DataSource = products;
                 treeList1.EndUpdate();
-
-                var categoriesWithProducts = _categoryService.GetCategoriesWithProducts();
-
-                ConstructTreeList2();
-
-                treeList2.BeginUpdate();
-                treeList2.DataSource = categoriesWithProducts;
-                treeList2.EndUpdate();
             }
             catch (Exception ex)
             {
